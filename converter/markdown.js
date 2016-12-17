@@ -83,6 +83,15 @@ while ((stra = codeRegExp.exec(str)) !== null) {
   return str;
  }
 
+ var parseDel = function(str) {
+  var delRegExp = /\{(.*?)\}/
+  var stra = [];
+  while ((stra = delRegExp.exec(str)) !== null) {
+    str = str.replace(stra[0], '<del>' + stra[1] + '</del>');
+  }
+  return str;
+ }
+
 var markdown = {
   parse: function (str, strict) {
     'use strict';
@@ -95,6 +104,7 @@ var markdown = {
     str = parseLink(str);
     str = parseCode(str);
     str = parseBlockQuote(str);
+    str = parseDel(str);
     return str;
   }
 };
